@@ -16,8 +16,7 @@ namespace TrashCollector.Models
         public int ZipCode { get; set; }
 
         [ForeignKey("IdentityUser")]
-        public int IdentityID { get; set; }
-        //Might have to be a string
+        public string IdentityUserId { get; set; }
         public IdentityUser identityUser { get; set; }
 
     }

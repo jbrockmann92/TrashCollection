@@ -29,8 +29,7 @@ namespace TrashCollector.Models
         public Pickup pickup { get; set; }
         
         [ForeignKey("IdentityUser")]
-        public int IdentityId { get; set; }
-        //might be a string, not int
+        public string IdentityUserId { get; set; }
         public IdentityUser identityUser { get; set; }
 
     }

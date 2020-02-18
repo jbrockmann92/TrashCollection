@@ -20,7 +20,7 @@ namespace TrashCollector.Data
 
             builder.Entity<IdentityRole>()
                 .HasData(
-                new IdentityRole
+                new IdentityRole //This is a built-in, or at least inherits from a built-in class. That's why it doesn't have to be made and defined
                 {
                     Name = "Admin",
                     NormalizedName = "ADMIN"
@@ -35,6 +35,8 @@ namespace TrashCollector.Data
                     Name = "Customer",
                     NormalizedName = "CUSTOMER",
                 }
+
+                //Should I have something in here where I match the most recently created Admin, Employee, or Customer to its id by saving the id as its id?
             );
         }
 
