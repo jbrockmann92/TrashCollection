@@ -54,6 +54,7 @@ namespace TrashCollector.Controllers
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["PickupId"] = new SelectList(_context.Set<Pickup>(), "Id", "Id");
             return View();
+            //I want to require an address when they are created
         }
 
         // POST: Customers/Create
