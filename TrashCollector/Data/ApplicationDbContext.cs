@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TrashCollector.Models;
 
 namespace TrashCollector.Data
 {
@@ -39,6 +40,10 @@ namespace TrashCollector.Data
                 //Should I have something in here where I match the most recently created Admin, Employee, or Customer to its id by saving the id as its id?
             );
         }
+
+        public DbSet<TrashCollector.Models.Customer> Customer { get; set; }
+
+        public DbSet<TrashCollector.Models.Employee> Employee { get; set; }
 
         
     }
