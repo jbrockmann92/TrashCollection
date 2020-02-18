@@ -22,7 +22,9 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employee.Include(e => e.identityUser);
+            //Want to display customers here probably. I don't really care about the other employees. 
+            //Need to find them based on their zip code. Need to require address info from customer when they register
+            var applicationDbContext = _context.Customer.Include(c => c.identityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
