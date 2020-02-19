@@ -23,8 +23,12 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(this.User);
+            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
+            return View(await applicationDbContext.ToListAsync());
             //Maybe want to include buttons on the homepage that allow the user to do things, but not necessary
+
+            //Must be something going on with the create method. It's only if it hits the create method that the list of other customers comes up
+            //Create method goes to index after. Need to default to Index after login I think
         }
 
         // GET: Customers/Details/5

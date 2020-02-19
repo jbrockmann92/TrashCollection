@@ -23,17 +23,24 @@ namespace TrashCollector.Controllers
         public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (User.IsInRole("Customer"))
+            if (this.User != null) //Want to check something like if they already have a name or zip code assigned. If so, we don't need to run this. Not right currently
             {
-                return RedirectToAction("Create", "Customers");
-            }
-            else if (User.IsInRole("Employee"))
-            {
-                return RedirectToAction("Create", "Employees");
+                if (User.IsInRole("Customer"))
+                {
+                    return RedirectToAction("Create", "Customers");
+                }
+                else if (User.IsInRole("Employee"))
+                {
+                    return RedirectToAction("Create", "Employees");
+                }
+                else
+                {
+                    return View("Index");
+                }
             }
             else
             {
-                return View();
+                return View("Index");
             }
         }
 
