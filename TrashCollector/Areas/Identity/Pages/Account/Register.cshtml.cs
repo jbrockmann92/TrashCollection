@@ -102,6 +102,11 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                         //Attach user.Id to customer.Id so they are always connected once created
                         return RedirectToAction("Create", "Customers");
                     }
+                    if(Input.Role == "Employee")
+                    {
+                        //Attach user.Id to employee.Id when created so they are connected
+                        return RedirectToAction("Create", "Employees");
+                    }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
