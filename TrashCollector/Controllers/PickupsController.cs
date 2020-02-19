@@ -59,9 +59,8 @@ namespace TrashCollector.Controllers
             if (ModelState.IsValid)
             {
                 _context.Pickup.Add(pickup);
-                //Same issue here. Just creating a pickup, but the system has no idea this is anyone's
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Customers");
             }
             return View(pickup);
         }

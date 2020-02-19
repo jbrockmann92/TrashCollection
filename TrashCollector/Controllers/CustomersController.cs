@@ -75,6 +75,7 @@ namespace TrashCollector.Controllers
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             ViewData["PickupId"] = new SelectList(_context.Set<Pickup>(), "Id", "Id", customer.PickupId);
+
             return View(customer);
         }
 
@@ -92,7 +93,6 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             ViewData["PickupId"] = new SelectList(_context.Set<Pickup>(), "Id", "Id", customer.PickupId);
             return View(customer);
         }
@@ -130,7 +130,6 @@ namespace TrashCollector.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             ViewData["PickupId"] = new SelectList(_context.Set<Pickup>(), "Id", "Id", customer.PickupId);
             return View(customer);
         }

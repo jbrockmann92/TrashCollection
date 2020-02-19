@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-TrashCollector-F9A85403-B0C8-445F-97EE-1F34342E11C6</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200219165510_ChangedCustomerAndPickupModels.cs" />
+    <Compile Remove="Data\Migrations\20200219165510_ChangedCustomerAndPickupModels.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />

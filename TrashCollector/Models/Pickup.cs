@@ -11,6 +11,7 @@ namespace TrashCollector.Models
         [Key]
         public int Id { get; set; }
         public string PickupDay { get; set; }
+        //Make into list? Then customer can choose from a dropdown menu
         public bool IsSuspended { get; set; }
         public DateTime SuspendedStart { get; set; }
         public DateTime SuspendedEnd { get; set; }
