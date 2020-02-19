@@ -22,7 +22,7 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.identityUser).Include(c => c.pickup);
+            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,8 +36,8 @@ namespace TrashCollector.Controllers
 
             var customer = await _context.Customer
                 .Include(c => c.Address)
-                .Include(c => c.identityUser)
-                .Include(c => c.pickup)
+                .Include(c => c.IdentityUser)
+                .Include(c => c.Pickup)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -143,8 +143,8 @@ namespace TrashCollector.Controllers
 
             var customer = await _context.Customer
                 .Include(c => c.Address)
-                .Include(c => c.identityUser)
-                .Include(c => c.pickup)
+                .Include(c => c.IdentityUser)
+                .Include(c => c.Pickup)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {

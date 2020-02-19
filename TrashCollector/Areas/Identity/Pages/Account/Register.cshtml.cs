@@ -95,6 +95,13 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                     }
                     _logger.LogInformation("User created a new account with password.");
 
+                    //if user role is Customer then redirect them to Create action on CustomerController
+                    //Address needs to be linked in the section this goes to. Pickup information as well
+                    if(Input.Role == "Customer")
+                    {
+                        //Attach user.Id to customer.Id so they are always connected once created
+                        return RedirectToAction("Create", "Customers");
+                    }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

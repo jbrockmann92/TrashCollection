@@ -26,11 +26,11 @@ namespace TrashCollector.Models
         [ForeignKey("Pickup")]
         [Display(Name = "Pickup Information")]
         public int PickupId { get; set; }
-        public Pickup pickup { get; set; }
+        public Pickup Pickup { get; set; }
         
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
-        public IdentityUser identityUser { get; set; }
+        public IdentityUser IdentityUser { get; set; }
 
     }
 }

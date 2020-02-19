@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+@*Take the register model's info and put into a new customer/employee??*@
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
@@ -33,6 +33,8 @@
                 <span asp-validation-for="Input.Role" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
+            @*I think I need something here that calls the create method in the class that they've chosen from the dropdown. Maybe go through this, then require those? I guess I don't have
+                to, but customers who want their stuff picked up have to enter their address later??*@
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
