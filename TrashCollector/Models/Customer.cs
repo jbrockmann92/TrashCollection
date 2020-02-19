@@ -20,16 +20,16 @@ namespace TrashCollector.Models
 
         [ForeignKey("Address")]
         [Display(Name = "Address")]
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public Address Address { get; set; }
 
         [ForeignKey("Pickup")]
         [Display(Name = "Pickup Information")]
-        public int PickupId { get; set; }
+        public int? PickupId { get; set; }
         public Pickup Pickup { get; set; }
         
         [ForeignKey("IdentityUser")]
-        public string IdentityUserId { get; set; }
+        public string? IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
 
     }
