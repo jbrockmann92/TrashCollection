@@ -25,7 +25,7 @@ namespace TrashCollector.Controllers
             //Want to display customers here probably. I don't really care about the other employees. 
             //Need to find them based on their zip code. Need to require address info from customer when they register
             //Right now, registering adds the registering person to the AspNetUsers table, but nothing else. Doesn't add them to the roles table or the db of their type
-            var applicationDbContext = _context.Customer.Select(u=>u);
+            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
             return View(await applicationDbContext.ToListAsync());
             //How are you supposed to get the users that were registered into the database? Or at least read the database?
         }

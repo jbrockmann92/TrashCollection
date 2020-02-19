@@ -23,8 +23,8 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
-            return View(await applicationDbContext.ToListAsync());
+            return View();
+            //Maybe want to include buttons on the homepage that allow the user to do things, but not necessary
         }
 
         // GET: Customers/Details/5
