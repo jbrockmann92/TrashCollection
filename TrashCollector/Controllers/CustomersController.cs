@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -52,6 +53,15 @@ namespace TrashCollector.Controllers
         {
             //This creates a list of addresses, etc. I want to input a new one
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //var userId = _context.UserRoles.Select(a => a).LastOrDefault(e => e.RoleId != null);
+            ////This doesn't work because it tries to grab the null row at the bottom?
+            //Customer customer = new Customer();
+            //customer.IdentityUserId = userId.UserId;
+
+            //I don't think any of this is going to work. The table doesn't update at the top or bottom. Weird. Need to grab most recent item
+
+            //Somewhere around here I need to assign the most recently created userid, or grab the identityUser and assign them to the customer I'm going to create
+            //I need that long string of gibberish that's already put into the AspNetUserRoles table so I can grab the user and put them into the IdentityUser column in the Customer table???
             return View();
             //I want to require an address when they are created
             //How to attach the user.Id to the customer.Id??
@@ -68,6 +78,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.IdentityUser = ; //What here? How do I grab the most recently created user from the db? Or do I want just the Id to match?
                 _context.Customer.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Create", "Addresses");

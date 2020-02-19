@@ -99,12 +99,12 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                     //Address needs to be linked in the section this goes to. Pickup information as well
                     if(Input.Role == "Customer")
                     {
-                        //Attach user.Id to customer.Id so they are always connected once created
+                        //Attach user.Id to customer so they are always connected once created
                         return RedirectToAction("Create", "Customers");
                     }
                     if(Input.Role == "Employee")
                     {
-                        //Attach user.Id to employee.Id when created so they are connected
+                        //Attach user.Id to employee when created so they are connected
                         return RedirectToAction("Create", "Employees");
                     }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

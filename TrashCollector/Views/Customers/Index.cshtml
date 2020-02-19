@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Pickup.PickupDay)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id) @*Isn't reading this for some reason. Maybe it's never assigned to the customer?*@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

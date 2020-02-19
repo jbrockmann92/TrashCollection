@@ -30,6 +30,7 @@ namespace TrashCollector.Models
         
         [ForeignKey("IdentityUser")]
         public string? IdentityUserId { get; set; }
+        //Should this match the one from AspNetUserRoles? Or be unique? Unique I think, then the IdentityUser has its own identifier
         public IdentityUser IdentityUser { get; set; }
 
     }
