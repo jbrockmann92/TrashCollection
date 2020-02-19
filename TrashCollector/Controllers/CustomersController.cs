@@ -23,7 +23,7 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View();
+            return View(this.User);
             //Maybe want to include buttons on the homepage that allow the user to do things, but not necessary
         }
 

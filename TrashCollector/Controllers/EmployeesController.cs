@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,12 +23,9 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            //Want to display customers here probably. I don't really care about the other employees. 
-            //Need to find them based on their zip code. Need to require address info from customer when they register
-            //Right now, registering adds the registering person to the AspNetUsers table, but nothing else. Doesn't add them to the roles table or the db of their type
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
             return View(await applicationDbContext.ToListAsync());
-            //How are you supposed to get the users that were registered into the database? Or at least read the database?
+            //This is probably where I want to only include the customers whose zip code matches the employee's.
         }
 
         // GET: Employees/Details/5
@@ -65,6 +63,9 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                employee.IdentityUserId = userId;
+
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
