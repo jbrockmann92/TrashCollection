@@ -55,6 +55,8 @@ namespace TrashCollector.Controllers
             return View();
             //I want to require an address when they are created
             //How to attach the user.Id to the customer.Id??
+
+            //Could have them create an address during registration, then choose that address from a dropdown list
         }
 
         // POST: Customers/Create
@@ -68,7 +70,7 @@ namespace TrashCollector.Controllers
             {
                 _context.Customer.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Addresses");
             }
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);

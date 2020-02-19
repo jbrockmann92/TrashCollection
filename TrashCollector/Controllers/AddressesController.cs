@@ -58,9 +58,9 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(address);
+                _context.Address.Add(address);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Pickups");
             }
             return View(address);
         }
