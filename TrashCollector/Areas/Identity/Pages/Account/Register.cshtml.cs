@@ -97,16 +97,7 @@ namespace TrashCollector.Areas.Identity.Pages.Account
 
                     //if user role is Customer then redirect them to Create action on CustomerController
                     //Address needs to be linked in the section this goes to. Pickup information as well
-                    if(Input.Role == "Customer")
-                    {
-                        //Attach user.Id to customer so they are always connected once created
-                        return RedirectToAction("Create", "Customers");
-                    }
-                    if(Input.Role == "Employee")
-                    {
-                        //Attach user.Id to employee when created so they are connected
-                        return RedirectToAction("Create", "Employees");
-                    }
+                    
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

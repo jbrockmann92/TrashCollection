@@ -78,9 +78,9 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                var orderedUsers = _context.Users.OrderByDescending(u => u);
-                customer.IdentityUser = orderedUsers.First(); //What here? How do I grab the most recently created user from the db? Or do I want just the Id to match?
-                //And this may not assign a key automatically to the IdentityUser that I assign to the Customer?
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+
                 _context.Customer.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Create", "Addresses");

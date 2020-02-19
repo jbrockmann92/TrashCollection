@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrashCollector.Data;
 using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
@@ -20,7 +22,19 @@ namespace TrashCollector.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (User.IsInRole("Customer"))
+            {
+                return RedirectToAction("Create", "Customers");
+            }
+            else if (User.IsInRole("Employee"))
+            {
+                return RedirectToAction("Create", "Employees");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()

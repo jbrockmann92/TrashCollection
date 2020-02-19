@@ -22,14 +22,6 @@
                 <label asp-for="LastName" class="control-label"></label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdentityUserId" class="control-label"></label>
-                <select asp-for="IdentityUserId" class ="form-control" asp-items="ViewBag.IdentityUserId"></select>
-                @*This is where I need to assign the generated id that will be in the joint aspnetuserroles table to identify what kind of user they are?
-                    Actually just need to assign the user's id in that table to the IdentityUser of the customer I think, then do the same, but 
-                    Employee, on the employee Create.cshtml file*@
-            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
