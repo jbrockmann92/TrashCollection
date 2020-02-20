@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
-            //Need to get the cshtml file to print off all this information, not just the headings and/or Ids.
+            //This might be kind of redundant at this point? Maybe not. Need to join these so they are accessible later?
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             //I need to gt into the joint table here and compare? Or something. Grab all the customers and grab their zip codes
@@ -33,6 +33,34 @@ namespace TrashCollector.Controllers
             return View(await customersMatchedByZip.ToListAsync());
             
             //I also want to create a method to sort customers by day of the week
+        }
+
+        //Get
+        public IActionResult IndexDaysOfWeek()
+        {
+            return View();
+        }
+
+        //Post
+        [HttpPost]
+        public async Task<IActionResult> IndexDaysOfWeek()
+        {
+            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
+            var customersZipAndDay =
+
+
+                //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+                //Something here about the dropdown menu
+
+            //Need to create a IndexDaysOfWeek.cshtml file that will run when this method returns the View()
+            //Should look very similar to Index.cshtml
+            //I want a dropdown menu, then 
+            //I think I want this as [httpPost] so that I can grab the employee's input on the cshtml page
+
+            return View(await customersMatchedByZip.ToListAsync());
         }
 
         // GET: Employees/Details/5
