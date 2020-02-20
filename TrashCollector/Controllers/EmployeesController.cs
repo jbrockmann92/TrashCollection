@@ -23,10 +23,8 @@ namespace TrashCollector.Controllers
         public async Task<IActionResult> Index(string? day)
         {
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
-            //This might be kind of redundant at this point? Maybe not. Need to join these so they are accessible later?
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
-            //I need to gt into the joint table here and compare? Or something. Grab all the customers and grab their zip codes
             var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
             var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == DateTime.Today.DayOfWeek.ToString());
             
