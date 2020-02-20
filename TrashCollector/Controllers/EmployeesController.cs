@@ -21,7 +21,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? day)
         {
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
             //This might be kind of redundant at this point? Maybe not. Need to join these so they are accessible later?
@@ -29,6 +29,14 @@ namespace TrashCollector.Controllers
             var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             //I need to gt into the joint table here and compare? Or something. Grab all the customers and grab their zip codes
             var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
+            
+            if (day != null)
+            {
+                var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
+                return View(await customersMatchedByZipDay.ToListAsync());
+                //This may actually work. Need something in the other Index Method (Post?) that will allow the user to choose a day
+                //Button that allows the user to input into a field, then if they press it, it calls Index method? I need a post method though I think that has this in it?
+            }
 
             return View(await customersMatchedByZip.ToListAsync());
             
@@ -39,8 +47,9 @@ namespace TrashCollector.Controllers
         public IActionResult IndexDaysOfWeek()
         {
             //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            //Something here about the dropdown menu
+            //Is it here that I want the employee to decide which day they want? Or In Index.cshtml? Or IndexDaysOfWeek.cshtml?
             return View();
+            //I might not even need a separate method for this. What if I create a get Index method, leave the Post as is, and write the 
         }
 
         //Post
@@ -74,7 +83,7 @@ namespace TrashCollector.Controllers
 
             var customer = await _context.Customer
                 .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
             if (customer == null)
             {
                 return NotFound();
