@@ -24,7 +24,13 @@ namespace TrashCollector.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
-            return View(await applicationDbContext.ToListAsync());
+            //This is where I want the logic that will only grab those customers whose zip matches the logged in user. I think
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            //I need to gt into the joint table here and compare? Or something. Grab all the customers and grab their zip codes
+            var customersMatchedByZip = applicationDbContext.Select(c => c.Address.ZipCode == currentEmployee.ZipCode);
+
+            return View(await customersMatchedByZip.ToListAsync());
             //This is probably where I want to only include the customers whose zip code matches the employee's.
         }
 
