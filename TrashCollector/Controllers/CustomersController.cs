@@ -86,7 +86,6 @@ namespace TrashCollector.Controllers
                 customer.IdentityUserId = userId;
 
                 _context.Customer.Add(customer);
-                await _context.SaveChangesAsync();
                 return RedirectToAction("Create", "Addresses");
             }
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);

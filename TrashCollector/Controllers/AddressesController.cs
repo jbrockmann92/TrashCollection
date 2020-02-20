@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -59,6 +60,12 @@ namespace TrashCollector.Controllers
             if (ModelState.IsValid)
             {
                 _context.Address.Add(address);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //Want to grab the user who matches the id and assign the address to them
+                var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+                //I think this should work. Already assigned it yeah?
+                currentUser.AddressId = address.Id;
+                //Will that work also?
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Create", "Pickups");
             }

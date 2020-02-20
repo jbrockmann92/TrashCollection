@@ -61,9 +61,10 @@
             </tr>
         }
 
-        <div class="form-group">
-            <a asp-action="Index" asp-route-id="@DateTime.Today" class="form-control" />Organize By Today's Pickups</a>
-        </div>
+    <div class="form-group">
+        <input type="hidden" asp-for="@DateTime.Today" />
+        <a asp-action="Index" class="form-control" />Organize By Today's Pickups</a>
+    </div>
         @*How do I create a submit button with a field that can take a string, then return to the Index method with that string?*@
     </tbody>
 </table>

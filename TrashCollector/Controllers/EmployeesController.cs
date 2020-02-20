@@ -20,7 +20,6 @@ namespace TrashCollector.Controllers
             _context = context;
         }
 
-        // GET: Employees
         public async Task<IActionResult> Index(string? day)
         {
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
@@ -29,49 +28,50 @@ namespace TrashCollector.Controllers
             var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             //I need to gt into the joint table here and compare? Or something. Grab all the customers and grab their zip codes
             var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
+            var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == DateTime.Today.DayOfWeek.ToString());
             
-            if (day != null)
-            {
-                var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
-                return View(await customersMatchedByZipDay.ToListAsync());
-                //This may actually work. Need something in the other Index Method (Post?) that will allow the user to choose a day
-                //Button that allows the user to input into a field, then if they press it, it calls Index method? I need a post method though I think that has this in it?
-            }
+            //if (day != null)
+            //{
+            //    var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
+            //    return View(await customersMatchedByZipDay.ToListAsync());
+            //    //This may actually work. Need something in the other Index Method (Post?) that will allow the user to choose a day
+            //    //Button that allows the user to input into a field, then if they press it, it calls Index method? I need a post method though I think that has this in it?
+            //}
 
             return View(await customersMatchedByZip.ToListAsync());
             
             //I also want to create a method to sort customers by day of the week
         }
 
-        //Get
-        public IActionResult IndexDaysOfWeek()
-        {
-            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            //Is it here that I want the employee to decide which day they want? Or In Index.cshtml? Or IndexDaysOfWeek.cshtml?
-            return View();
-            //I might not even need a separate method for this. What if I create a get Index method, leave the Post as is, and write the 
-        }
+        ////Get
+        //public IActionResult IndexDaysOfWeek()
+        //{
+        //    //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+        //    //Is it here that I want the employee to decide which day they want? Or In Index.cshtml? Or IndexDaysOfWeek.cshtml?
+        //    return View();
+        //    //I might not even need a separate method for this. What if I create a get Index method, leave the Post as is, and write the 
+        //}
 
-        //Post
-        [HttpPost]
-        public async Task<IActionResult> IndexDaysOfWeek(string day)
-        {
-            var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
-            var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
-            var customersZipAndDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
+        ////Post
+        //[HttpPost]
+        //public async Task<IActionResult> IndexDaysOfWeek(string day)
+        //{
+        //    var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+        //    var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
+        //    var customersZipAndDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
 
 
                 
 
-            //Need to create a IndexDaysOfWeek.cshtml file that will run when this method returns the View()
-            //Should look very similar to Index.cshtml
-            //I want a dropdown menu, then 
-            //I think I want this as [httpPost] so that I can grab the employee's input on the cshtml page
+        //    //Need to create a IndexDaysOfWeek.cshtml file that will run when this method returns the View()
+        //    //Should look very similar to Index.cshtml
+        //    //I want a dropdown menu, then 
+        //    //I think I want this as [httpPost] so that I can grab the employee's input on the cshtml page
 
-            return View(await customersMatchedByZip.ToListAsync());
-        }
+        //    return View(await customersMatchedByZip.ToListAsync());
+        //}
 
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
