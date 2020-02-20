@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -59,6 +60,10 @@ namespace TrashCollector.Controllers
             if (ModelState.IsValid)
             {
                 _context.Pickup.Add(pickup);
+                await _context.SaveChangesAsync();
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+                currentUser.PickupId = pickup.Id;
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Customers");
             }
