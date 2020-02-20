@@ -90,13 +90,13 @@ namespace TrashCollector.Controllers
                 //Need to get this to edit customers, not employees??
             }
 
-            var employee = await _context.Employee.FindAsync(id);
-            if (employee == null)
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
         }
 
         // POST: Employees/Edit/5
