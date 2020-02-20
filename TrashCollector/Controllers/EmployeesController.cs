@@ -38,22 +38,23 @@ namespace TrashCollector.Controllers
         //Get
         public IActionResult IndexDaysOfWeek()
         {
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //Something here about the dropdown menu
             return View();
         }
 
         //Post
         [HttpPost]
-        public async Task<IActionResult> IndexDaysOfWeek()
+        public async Task<IActionResult> IndexDaysOfWeek(string day)
         {
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
-            var customersZipAndDay =
+            var customersZipAndDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
 
 
-                //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-                //Something here about the dropdown menu
+                
 
             //Need to create a IndexDaysOfWeek.cshtml file that will run when this method returns the View()
             //Should look very similar to Index.cshtml
