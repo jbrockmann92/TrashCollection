@@ -56,6 +56,11 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+        public async Task<IActionResult> SuspendService(int id)
+        {
+            //Grab customer from db. Bring up the delivery info associated with that customer. Tell them to enter the dates
+        }
+
         // GET: Customers/Create
         public IActionResult Create()
         {

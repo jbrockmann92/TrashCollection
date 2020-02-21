@@ -1,18 +1,11 @@
-﻿@model IEnumerable<TrashCollector.Models.Customer>
-
+﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "SuspendService";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>SuspendService</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div>
-    <a asp-action="SuspendService">Suspend services</a>
-</div>
 <table class="table">
     <thead>
         <tr>
@@ -39,7 +32,7 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-            //Only show the customer who is currently signed in here. Not all customers
+        //Only show the customer who is currently signed in here. Not all customers
         {
             <tr>
                 <td>
@@ -69,3 +62,4 @@
         }
     </tbody>
 </table>
+
