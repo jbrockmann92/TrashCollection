@@ -114,13 +114,13 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Customer customer)
         {
-
-            //Need to get this to populate the fields I want to save. Otherwise It overwrites with blank stuff. Need to keep all customer info when updating
             var pickup = _context.Pickup.Where(p => p.Id == customer.PickupId).FirstOrDefault();
+            pickup.PickupDay = customer.Pickup.PickupDay;
             var address = _context.Address.Where(a => a.Id == customer.AddressId).FirstOrDefault();
             var idUser = _context.Users.Where(u=>u.Id == customer.IdentityUserId).FirstOrDefault();
 
             customer.Pickup = pickup;
+            //This overwrites any updates they have made to the pickup day
             customer.Address = address;
             customer.IdentityUser = idUser;
             if (ModelState.IsValid)
