@@ -21,11 +21,7 @@ namespace TrashCollector.Data
 
             builder.Entity<IdentityRole>()
                 .HasData(
-                new IdentityRole //This is a built-in, or at least inherits from a built-in class. That's why it doesn't have to be made and defined
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                },
+                //This is a built-in, or at least inherits from a built-in class. That's why it doesn't have to be made and defined
                 new IdentityRole
                 {
                     Name = "Employee",
