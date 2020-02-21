@@ -88,6 +88,7 @@ namespace TrashCollector.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
+                customer.Pickup = new Pickup();
 
                 _context.Customer.Add(customer);
                 _context.SaveChanges();

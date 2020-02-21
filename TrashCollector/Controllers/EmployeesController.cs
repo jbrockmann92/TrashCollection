@@ -47,9 +47,8 @@ namespace TrashCollector.Controllers
             //Also remove customer's ability to change their own balance
 
             //I also want to reset this bool after the week is over?
-            var customer = await _context.Customer
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var customer = _context.Customer.Where(c => c.Id == id).FirstOrDefault();
+            customer.Pickup = _context.Pickup.Where(p => p.Id == customer.PickupId).FirstOrDefault();
             customer.Pickup.IsCompleted = true;
             customer.Balance += 10;
             _context.SaveChanges();

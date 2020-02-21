@@ -65,6 +65,7 @@ namespace TrashCollector.Controllers
                 var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
                 currentUser.PickupId = pickup.Id;
                 currentUser.Pickup = pickup;
+                //it doesn't actually save the pickup or the address. Do that later
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Customers");
             }
