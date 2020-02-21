@@ -167,15 +167,14 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employee
-                .Include(e => e.identityUser)
+            var customer = await _context.Customer
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(customer);
         }
 
         // POST: Employees/Delete/5
@@ -183,8 +182,8 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employee.FindAsync(id);
-            _context.Employee.Remove(employee);
+            var customer = await _context.Customer.FindAsync(id);
+            _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
