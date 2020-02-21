@@ -70,6 +70,7 @@ namespace TrashCollector.Controllers
             //Take the customer's inputs and change the days of suspension
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            currentUser.Pickup = _context.Pickup.Where(p => p.Id == currentUser.PickupId).FirstOrDefault();
             currentUser.Pickup.SuspendedStart = customer.Pickup.SuspendedStart;
             currentUser.Pickup.SuspendedEnd = customer.Pickup.SuspendedEnd;
 
