@@ -56,9 +56,26 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        public async Task<IActionResult> SuspendService(int id)
+        public IActionResult SuspendService(int id)
         {
             //Grab customer from db. Bring up the delivery info associated with that customer. Tell them to enter the dates
+            var customer = _context.Customer.Where(c => c.Id == id).FirstOrDefault();
+
+            return View(customer);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SuspendService(Customer customer)
+        {
+            //Take the customer's inputs and change the days of suspension
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            currentUser.Pickup = customer.Pickup;
+
+            currentUser.Pickup.IsSuspended = true;
+
+
+            return RedirectToAction("Index");
         }
 
         // GET: Customers/Create
