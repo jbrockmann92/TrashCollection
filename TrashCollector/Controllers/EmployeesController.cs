@@ -26,15 +26,14 @@ namespace TrashCollector.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentEmployee = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             var customersMatchedByZip = applicationDbContext.Where(c => c.Address.ZipCode == currentEmployee.ZipCode);
-            var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == DateTime.Today.DayOfWeek.ToString());
-            
-            //if (day != null)
-            //{
-            //    var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
-            //    return View(await customersMatchedByZipDay.ToListAsync());
-            //    //This may actually work. Need something in the other Index Method (Post?) that will allow the user to choose a day
-            //    //Button that allows the user to input into a field, then if they press it, it calls Index method? I need a post method though I think that has this in it?
-            //}
+            //var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == DateTime.Today.DayOfWeek.ToString());
+            //This statement isn't working for some reason. Seems like it should, but it's not returning the 3 customers who have Thursday as delivery day
+
+            if (day != null)
+            {
+                var customersMatchedByZipDay = customersMatchedByZip.Where(c => c.Pickup.PickupDay == day);
+                return View(await customersMatchedByZipDay.ToListAsync());
+            }
 
             return View(await customersMatchedByZip.ToListAsync());
             

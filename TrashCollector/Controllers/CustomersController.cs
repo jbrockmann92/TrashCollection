@@ -23,8 +23,12 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var applicationDbContext = _context.Customer.Include(c => c.Address).Include(c => c.IdentityUser).Include(c => c.Pickup);
-            return View(await applicationDbContext.ToListAsync());
+            var singleUser = applicationDbContext.Where(c => c.IdentityUserId == userId);
+            return View(await singleUser.ToListAsync());
+            //Should be working now. Should only return the current user
+
             //Maybe want to include buttons on the homepage that allow the user to do things, but not necessary
 
             //Must be something going on with the create method. It's only if it hits the create method that the list of other customers comes up
