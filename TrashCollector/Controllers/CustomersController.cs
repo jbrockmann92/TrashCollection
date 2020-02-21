@@ -130,6 +130,7 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
+            //Need to get this to populate the fields I want to save. Otherwise It overwrites with blank stuff. Need to keep all customer info when updating
             if (ModelState.IsValid)
             {
                 try
