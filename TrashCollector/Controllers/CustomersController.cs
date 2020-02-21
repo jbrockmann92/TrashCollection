@@ -103,18 +103,7 @@ namespace TrashCollector.Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            ViewData["PickupId"] = new SelectList(_context.Set<Pickup>(), "Id", "Id", customer.PickupId);
+            var customer = _context.Customer.Where(c=>c.Id == id).FirstOrDefault();
             return View(customer);
         }
 
@@ -123,18 +112,24 @@ namespace TrashCollector.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Balance,AddressId,PickupId,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
-            if (id != customer.Id)
-            {
-                return NotFound();
-            }
 
             //Need to get this to populate the fields I want to save. Otherwise It overwrites with blank stuff. Need to keep all customer info when updating
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            var pickup = _context.Pickup.Where(p => p.Id == currentUser.PickupId).FirstOrDefault();
+            var address = _context.Address.Where(a => a.Id == currentUser.AddressId).FirstOrDefault();
+            var idUser = _context.Users.Where(u=>u.Id == currentUser.IdentityUserId).FirstOrDefault();
+
+            customer.Pickup = pickup;
+            customer.Address = address;
+            customer.IdentityUser = idUser;
             if (ModelState.IsValid)
             {
                 try
                 {
+                    //Assign Pickup, IdentityUser, and Address again here? Doesn't seem ideal
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
