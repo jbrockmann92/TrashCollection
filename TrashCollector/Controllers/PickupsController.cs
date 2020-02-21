@@ -64,6 +64,7 @@ namespace TrashCollector.Controllers
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
                 currentUser.PickupId = pickup.Id;
+                currentUser.Pickup = pickup;
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Customers");
             }

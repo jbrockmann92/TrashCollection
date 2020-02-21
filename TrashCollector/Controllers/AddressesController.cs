@@ -66,6 +66,7 @@ namespace TrashCollector.Controllers
                 var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
                 //I think this should work. Already assigned it yeah?
                 currentUser.AddressId = address.Id;
+                currentUser.Address = address;
                 await _context.SaveChangesAsync();
                 //Will that work also?
                 return RedirectToAction("Create", "Pickups");
