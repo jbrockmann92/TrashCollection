@@ -116,11 +116,9 @@ namespace TrashCollector.Controllers
         {
 
             //Need to get this to populate the fields I want to save. Otherwise It overwrites with blank stuff. Need to keep all customer info when updating
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var currentUser = _context.Customer.Where(c => c.IdentityUserId == userId).FirstOrDefault();
-            var pickup = _context.Pickup.Where(p => p.Id == currentUser.PickupId).FirstOrDefault();
-            var address = _context.Address.Where(a => a.Id == currentUser.AddressId).FirstOrDefault();
-            var idUser = _context.Users.Where(u=>u.Id == currentUser.IdentityUserId).FirstOrDefault();
+            var pickup = _context.Pickup.Where(p => p.Id == customer.PickupId).FirstOrDefault();
+            var address = _context.Address.Where(a => a.Id == customer.AddressId).FirstOrDefault();
+            var idUser = _context.Users.Where(u=>u.Id == customer.IdentityUserId).FirstOrDefault();
 
             customer.Pickup = pickup;
             customer.Address = address;
@@ -129,7 +127,6 @@ namespace TrashCollector.Controllers
             {
                 try
                 {
-                    //Assign Pickup, IdentityUser, and Address again here? Doesn't seem ideal
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
