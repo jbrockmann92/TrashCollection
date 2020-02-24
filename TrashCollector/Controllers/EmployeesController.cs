@@ -64,7 +64,7 @@ namespace TrashCollector.Controllers
             //I'm having to reassign address, pickup, etc. Should it be this way? Seems like the customer should hold onto that stuff
             var customerAddress = customerForPickup.Address.StreetAddress + ' ' + customerForPickup.Address.City + ' ' + customerForPickup.Address.ZipCode.ToString();
 
-            return View(customerAddress);
+            return View((object)customerAddress);
         }
 
         // GET: Employees/Details/5
