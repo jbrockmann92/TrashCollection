@@ -58,7 +58,12 @@ namespace TrashCollector.Controllers
 
         public IActionResult MapOfPickups()
         {
-            return View();
+            //Need to get all addresses here that match the employee's zip code. iqueryable
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var thisUser = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            var pickups = _context.Address.Where(c => c.ZipCode == thisUser.ZipCode);
+
+            return View(pickups);
         }
 
         // GET: Employees/Details/5
