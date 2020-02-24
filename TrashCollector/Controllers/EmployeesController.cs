@@ -56,14 +56,12 @@ namespace TrashCollector.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult MapOfPickups()
+        public IActionResult MapOfPickups(int id)
         {
             //Need to get all addresses here that match the employee's zip code. iqueryable
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var thisUser = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
-            var pickups = _context.Address.Where(c => c.ZipCode == thisUser.ZipCode);
+            var customerForPickup = _context.Customer.Where(c => c.Id == id).FirstOrDefault();
 
-            return View(pickups);
+            return View(customerForPickup);
         }
 
         // GET: Employees/Details/5

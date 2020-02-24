@@ -9,7 +9,6 @@
 
 <p>
     <a asp-action="Create">Create New</a>
-    <a asp-action="MapOfPickups">Show Pickups on Map</a>
 </p>
 
 
@@ -105,6 +104,7 @@
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
                     <a asp-action="PickupCompleted" asp-route-id="@item.Id">Complete Pickup</a>
+                    <a asp-action="MapOfPickups" asp-route-id="@item.Id">Show Pickup on Map</a>
                 </td>
             </tr>
         }

@@ -1,4 +1,4 @@
-﻿@model IQueryable<TrashCollector.Models.Address>
+﻿@model TrashCollector.Models.Customer
 @{
     ViewData["Title"] = "MapOfPickups";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,19 +23,16 @@
         }
     </style>
 </head>
-@*May have to pass in a model here of addresses? Iqueryable?*@
 <body>
     <div id="map"></div>
     <script>
         var map;
         function initMap() {
-            center: new google.maps.position()
             var place = {lat: -25.344, lng: 131.036};
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: -34.397, lng: 150.644 },
                 zoom: 8
             });
-            //Pass in Iqueryable of the addresses in the db, then foreach. Create new marker for each. How to only return the ones that match their address?
             var marker = new google.maps.Marker({ position: place, map: map });
         }
     </script>
