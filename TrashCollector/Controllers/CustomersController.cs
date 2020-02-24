@@ -127,7 +127,7 @@ namespace TrashCollector.Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            var customer = _context.Customer.Where(c=>c.Id == id).FirstOrDefault();
+            var customer = _context.Customer.Where(c => c.Id == id).FirstOrDefault();
             return View(customer);
         }
 
@@ -141,7 +141,7 @@ namespace TrashCollector.Controllers
             var pickup = _context.Pickup.Where(p => p.Id == customer.PickupId).FirstOrDefault();
             pickup.PickupDay = customer.Pickup.PickupDay;
             var address = _context.Address.Where(a => a.Id == customer.AddressId).FirstOrDefault();
-            var idUser = _context.Users.Where(u=>u.Id == customer.IdentityUserId).FirstOrDefault();
+            var idUser = _context.Users.Where(u => u.Id == customer.IdentityUserId).FirstOrDefault();
 
             customer.Pickup = pickup;
             //This overwrites any updates they have made to the pickup day
