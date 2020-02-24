@@ -67,6 +67,22 @@ namespace TrashCollector.Controllers
             return View((object)customerAddress);
         }
 
+        public IActionResult MapOfAllPickups(string day)
+        {
+            //Need to get all addresses here that match the employee's zip code. iqueryable
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentUser = _context.Employee.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            var addressByDay = _context.Address.Where(a => a.ZipCode == currentUser.ZipCode);
+            List<string> listOfAddresses = new List<string>();
+            //var customerAddress = customerForPickup.Address.StreetAddress + ' ' + customerForPickup.Address.City + ' ' + customerForPickup.Address.ZipCode.ToString();
+            foreach (var item in addressByDay)
+            {
+                listOfAddresses.Add(item.StreetAddress + item.City + item.ZipCode);
+            }
+
+            return View(listOfAddresses);
+        }
+
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
