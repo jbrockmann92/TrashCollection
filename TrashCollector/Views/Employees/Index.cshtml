@@ -9,7 +9,54 @@
 
 <p>
     <a asp-action="Create">Create New</a>
+    <a asp-action="MapOfPickups">Show Pickups on Map</a>
 </p>
+
+
+<header>Sort by day of the week:</header>
+<div>
+    @{
+        string sunday = "Sunday";
+        <a asp-action="Index" asp-route-day="@sunday">Sunday</a>
+    }
+</div>
+<div>
+    @{
+        string monday = "Monday";
+        <a asp-action="Index" asp-route-day="@monday">Monday</a>
+    }
+</div>
+<div>
+    @{
+        string tuesday = "Tuesday";
+        <a asp-action="Index" asp-route-day="@tuesday">Tuesday</a>
+    }
+</div>
+<div>
+    @{
+        string wednesday = "Wednesday";
+        <a asp-action="Index" asp-route-day="@wednesday">Wednesday</a>
+    }
+</div>
+<div>
+    @{
+        string thursday = "Thursday";
+        <a asp-action="Index" asp-route-day="@thursday">Thursday</a>
+    }
+</div>
+<div>
+    @{
+        string friday = "Friday";
+        <a asp-action="Index" asp-route-day="@friday">Friday</a>
+    }
+</div>
+<div>
+    @{
+        string saturday = "Saturday";
+        <a asp-action="Index" asp-route-day="@saturday">Saturday</a>
+    }
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -61,48 +108,5 @@
                 </td>
             </tr>
         }
-        <header>Sort by day of the week:</header>
-        <div>
-            @{
-                string sunday = "Sunday";
-                <a asp-action="Index" asp-route-day="@sunday">Sunday</a>
-            }
-        </div>
-        <div>
-            @{
-                string monday = "Monday";
-                <a asp-action="Index" asp-route-day="@monday">Monday</a>
-            }
-        </div>
-        <div>
-            @{
-                string tuesday = "Tuesday";
-                <a asp-action="Index" asp-route-day="@tuesday">Tuesday</a>
-            }
-        </div>
-        <div>
-            @{
-                string wednesday = "Wednesday";
-                <a asp-action="Index" asp-route-day="@wednesday">Wednesday</a>
-            }
-        </div>
-        <div>
-            @{
-                string thursday = "Thursday";
-                <a asp-action="Index" asp-route-day="@thursday">Thursday</a>
-            }
-        </div>
-        <div>
-            @{
-                string friday = "Friday";
-                <a asp-action="Index" asp-route-day="@friday">Friday</a>
-            }
-        </div>
-        <div>
-            @{
-                string saturday = "Saturday";
-                <a asp-action="Index" asp-route-day="@saturday">Saturday</a>
-            }
-        </div>
     </tbody>
 </table>
