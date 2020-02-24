@@ -60,8 +60,11 @@ namespace TrashCollector.Controllers
         {
             //Need to get all addresses here that match the employee's zip code. iqueryable
             var customerForPickup = _context.Customer.Where(c => c.Id == id).FirstOrDefault();
+            customerForPickup.Address = _context.Address.Where(a => a.Id == customerForPickup.AddressId).FirstOrDefault();
+            //I'm having to reassign address, pickup, etc. Should it be this way? Seems like the customer should hold onto that stuff
+            var customerAddress = customerForPickup.Address.StreetAddress + ' ' + customerForPickup.Address.City + ' ' + customerForPickup.Address.ZipCode.ToString();
 
-            return View(customerForPickup);
+            return View(customerAddress);
         }
 
         // GET: Employees/Details/5

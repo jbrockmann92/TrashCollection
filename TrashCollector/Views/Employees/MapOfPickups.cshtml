@@ -1,4 +1,4 @@
-﻿@model TrashCollector.Models.Customer
+﻿@model string
 @{
     ViewData["Title"] = "MapOfPickups";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,29 +28,12 @@
 <body>
     <div id="map"></div>
     <script>
-        geocode();
-        function geocode() {
-            var location = "12 Main St Milwaukee WI"
-            axios.get('http://maps.googleapis.com/maps/api/geocode/json', {
-                params: {
-                    address: location,
-                    key: 'AIzaSyAjT5LRVBJHPdAIyvTuaFDx3t55zIPPgSA'
-                }
-            });
-
-            @*//$thisAddress = model.address;
-            //Probably doesn't work. How to get the address from the user selected by LINQ on EmployeesController?
-            $thisAddress = @Model.Address.StreetAddress + @Model.Address.City + @Model.Address.ZipCode.ToString();
-            //that might work
-            $formattedAddr = str_replace(' ', '+', $thisAddress);
-            $geocodeFromAddr = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddr.'&sensor=true_or_false&key=AIzaSyAjT5LRVBJHPdAIyvTuaFDx3t55zIPPgSA');
-            $output = json_decode($geocodeFromAddr);*@
-
-            var lat = response.data.results[0].geometry.location.lat;
-            var lng = results.data.results[0].geometry.location.lng;
-        }
+        @*@{
+        $thisAddress = @Model.Address.StreetAddress + @Model.Address.City + @Model.Address.ZipCode.ToString();
+            }*@
 
         var map;
+        geocode();
         function initMap() {
             //var addressLatLon = https://maps.googleapis.com/maps/api/geocode/json?address=thisAddress&key=AIzaSyAjT5LRVBJHPdAIyvTuaFDx3t55zIPPgSA;
             //Need to take the model's address and get it in the marker variable
@@ -58,7 +41,7 @@
                 center: { lat: -34.397, lng: 150.644 },
                 zoom: 8
             });
-            var marker = new google.maps.Marker({ position: { lat: lat, lng: lng }, map: map });
+            var marker = new google.maps.Marker({ position: { lat: 31, lng: -79 }, map: map });
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjT5LRVBJHPdAIyvTuaFDx3t55zIPPgSA&callback=initMap"
