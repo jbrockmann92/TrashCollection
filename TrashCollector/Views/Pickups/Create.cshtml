@@ -18,26 +18,6 @@
                 <input asp-for="PickupDay" class="form-control" />
                 <span asp-validation-for="PickupDay" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSuspended" /> @Html.DisplayNameFor(model => model.IsSuspended)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="SuspendedStart" class="control-label"></label>
-                <input asp-for="SuspendedStart" class="form-control" />
-                <span asp-validation-for="SuspendedStart" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SuspendedEnd" class="control-label"></label>
-                <input asp-for="SuspendedEnd" class="form-control" />
-                <span asp-validation-for="SuspendedEnd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OneTimePickup" class="control-label"></label>
-                <input asp-for="OneTimePickup" class="form-control" />
-                <span asp-validation-for="OneTimePickup" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
