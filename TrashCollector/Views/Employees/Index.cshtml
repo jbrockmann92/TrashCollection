@@ -5,12 +5,7 @@
     Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
+<h1>Welcome</h1>
 
 <header>Sort by day of the week:</header>
 <div>
@@ -74,7 +69,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Pickup.PickupDay)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.City)
+            </th>
+            <th>
+                Make Changes to Customer Accounts
+            </th>
         </tr>
     </thead>
     <tbody>
