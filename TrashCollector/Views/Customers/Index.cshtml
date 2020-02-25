@@ -7,12 +7,6 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div>
-    <a asp-action="SuspendService">Suspend services</a>
-</div>
 <table class="table">
     <thead>
         <tr>
@@ -30,9 +24,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Pickup.PickupDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
         </tr>
@@ -52,18 +43,15 @@
                     $@Html.DisplayFor(modelItem => item.Balance)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address.Id)
+                    @Html.DisplayFor(modelItem => item.Address.StreetAddress)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Pickup.PickupDay)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Make Account Changes</a> |
+                    <a asp-action="SuspendService">Suspend services</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete Account</a>
                 </td>
             </tr>
         }

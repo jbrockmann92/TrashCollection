@@ -35,27 +35,6 @@ namespace TrashCollector.Controllers
             //Create method goes to index after. Need to default to Index after login I think
         }
 
-        // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customer
-                .Include(c => c.Address)
-                .Include(c => c.IdentityUser)
-                .Include(c => c.Pickup)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
-        }
-
         public IActionResult SuspendService(int id)
         {
             //Grab customer from db. Bring up the delivery info associated with that customer. Tell them to enter the dates

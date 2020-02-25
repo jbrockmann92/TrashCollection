@@ -104,7 +104,9 @@
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
                     <a asp-action="PickupCompleted" asp-route-id="@item.Id">Complete Pickup</a> |
-                    <a asp-action="MapOfPickups" asp-route-id="@item.Id">Show Pickup Location on Map</a>
+                    <a asp-action="MapOfPickups" asp-route-id="@item.Id">Show Pickup Location on Map</a> |
+                    <a asp-action="MapOfAllPickups" asp-route-id="Thursday">Show all Pickups for Today</a>
+
                 </td>
             </tr>
         }

@@ -77,9 +77,9 @@ namespace TrashCollector.Controllers
             //var customerAddress = customerForPickup.Address.StreetAddress + ' ' + customerForPickup.Address.City + ' ' + customerForPickup.Address.ZipCode.ToString();
             foreach (var item in addressByDay)
             {
-                listOfAddresses.Add(item.StreetAddress + item.City + item.ZipCode);
+                listOfAddresses.Add(item.StreetAddress + ' ' + item.City + ' ' + item.ZipCode);
             }
-
+            //this is working. Not exactly right, but enough to pass what it needs to into MapOfAllPickups view
             return View(listOfAddresses);
         }
 
